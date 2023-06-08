@@ -25,6 +25,10 @@ public class Jugador {
         this.equipo = equipo;
     }
 
+    public Jugador(String nombre, String apellido, double altura, String posicion, int goles, int partidos, boolean esCapitan, int numeroCamiseta) {
+    }
+
+
     // Getters y setters
 
     public String getNombre() {

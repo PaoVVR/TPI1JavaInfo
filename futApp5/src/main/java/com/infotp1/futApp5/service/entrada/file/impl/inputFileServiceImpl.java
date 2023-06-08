@@ -20,8 +20,7 @@ public class inputFileServiceImpl implements inputFileService {
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(","); // Suponiendo que los datos están separados por comas
 
-                // Aquí debes crear un objeto Jugador utilizando los datos de cada línea del archivo
-                // y agregarlo a la lista de jugadores
+                //tengo que crear el objeto jugador utilizando los datos de cada línea del archivo y agregarlo a la lista de jugadores
             }
         } catch (IOException e) {
             e.printStackTrace();

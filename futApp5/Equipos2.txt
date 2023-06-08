@@ -1,0 +1,2 @@
+Equipo,Nombre,Apellido,Altura,Posicion,Goles,Partidos,EsCapitan,NumeroCamiseta
+paola,villa,1.56,Arquero,25,100,true,23

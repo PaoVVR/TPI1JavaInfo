@@ -23,8 +23,9 @@ public class OutputFileServiceImpl implements OutputFileService {
         }
     }
 
+
     @Override
-    public void exportarJugadoresAArchivo(String nombreArchivo) {
+    public void exportarJugadoresAArchivo(String rutaArchivoSalida) {
 
     }
 }

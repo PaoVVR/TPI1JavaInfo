@@ -1,0 +1,3 @@
+Nombre,Apellido,Altura,Posicion,Goles,Partidos,EsCapitan,NumeroCamiseta
+Jonas,Bri,1.8,Arquero,2,100,false,23
+Angel,Virulana,2.0,Delantero,30,100,true,10

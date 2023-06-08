@@ -43,10 +43,10 @@ public class Equipo {
     }
 
     public List<Jugador> getJugadores() {
-        return jugadores;
+        return (List<Jugador>) jugadores;
     }
 
     public void setJugadores(List<Jugador> jugadores) {
-        this.jugadores = jugadores;
+        this.jugadores = (List<Jugador>) jugadores;
     }
 }

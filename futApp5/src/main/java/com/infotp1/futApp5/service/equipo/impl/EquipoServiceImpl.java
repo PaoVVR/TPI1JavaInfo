@@ -6,11 +6,16 @@ import com.infotp1.futApp5.domain.Equipo;
 import com.infotp1.futApp5.domain.Jugador;
 import com.infotp1.futApp5.service.equipo.EquipoService;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class EquipoServiceImpl implements EquipoService {
+
 
     private static List<Equipo> equipos = new ArrayList<>();
     private static Scanner scanner;
@@ -58,8 +63,13 @@ public class EquipoServiceImpl implements EquipoService {
             System.out.print("¿Desea cargar más jugadores para este equipo? (True/False): ");
             cargarJugadores = scanner.nextBoolean();
         }
-
         System.out.print("¿Desea cargar más equipos? (true/false): ");
+        boolean cargarEquipos = scanner.nextBoolean();
+        if (!cargarEquipos) {
+            System.out.println("Equipos cargados correctamente.");
+        }
+    }
+        /*System.out.print("¿Desea cargar más equipos? (true/false): ");
         boolean cargarEquipos = scanner.nextBoolean();
         scanner.nextLine();
 
@@ -71,8 +81,8 @@ public class EquipoServiceImpl implements EquipoService {
         }
 
         System.out.println("Equipos cargados correctamente.");
+    }*/
 
-    }
 
 
     public void buscarJugadorPorNombre(Scanner scanner) {
@@ -122,7 +132,8 @@ public class EquipoServiceImpl implements EquipoService {
 
         return "No hay capitán asignado";
     }
-@Override
+
+    @Override
     public void mostrarJugadoresEquipo(Scanner scanner) {
         EquipoServiceImpl.scanner = scanner;
         System.out.print("Ingrese el nombre del equipo: ");
@@ -144,7 +155,8 @@ public class EquipoServiceImpl implements EquipoService {
 
         System.out.println("No se encontró ningún equipo con ese nombre.");
     }
-@Override
+
+    @Override
     public void eliminarEquipo(Scanner scanner) {
         System.out.print("Ingrese el nombre del equipo a eliminar: ");
         String nombreEquipo = scanner.next();
@@ -165,11 +177,45 @@ public class EquipoServiceImpl implements EquipoService {
         System.out.print("Ingrese el nombre del archivo: ");
         String nombreArchivo = scanner.next();
 
-        // Hacer algo con la lista de jugadores importados
+        try {
+            File archivo = new File(nombreArchivo);
+            Scanner lector = new Scanner(archivo);
+
+            List<Jugador> jugadoresImportados = new ArrayList<>();
+
+            if (lector.hasNextLine()) {
+                lector.nextLine();
+            }
+
+            while (lector.hasNextLine()) {
+                String linea = lector.nextLine();
+
+                String[] campos = linea.split(",");
+
+                if (campos.length == 9) {
+                    // Obtener los valores de los campos
+                    String nombre = campos[0].trim();
+                    String apellido = campos[1].trim();
+                    double altura = Double.parseDouble(campos[2].trim());
+                    String posicion = campos[3].trim();
+                    int goles = Integer.parseInt(campos[4].trim());
+                    int partidos = Integer.parseInt(campos[5].trim());
+                    boolean esCapitan = Boolean.parseBoolean(campos[6].trim());
+                    int numeroCamiseta = Integer.parseInt(campos[7].trim());
+                    String nombreEquipo = campos[8].trim();
 
 
-        // Lógica para importar jugadores desde archivo
+                    Jugador jugador = new Jugador(nombre, apellido, altura, posicion, goles, partidos, esCapitan, numeroCamiseta);
+                    jugadoresImportados.add(jugador);
+                }
+            }
+
+            lector.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Error al importar jugadores desde el archivo: Archivo no encontrado");
+        }
     }
+
     @Override
     public void exportarJugadoresAArchivo(Scanner scanner) {
         System.out.print("Ingrese el nombre del equipo: ");
@@ -180,7 +226,29 @@ public class EquipoServiceImpl implements EquipoService {
 
         for (Equipo equipo : equipos) {
             if (equipo.getNombre().equalsIgnoreCase(nombreEquipo)) {
-                // Lógica para exportar jugadores a archivo
+
+                List<Jugador> jugadores = equipo.getJugadores();
+
+                try (FileWriter writer = new FileWriter("./src/main/java/com/infotp1/futApp5/resources/"+ nombreArchivo)) {
+
+                    writer.write("Equipo,Nombre,Apellido,Altura,Posicion,Goles,Partidos,EsCapitan,NumeroCamiseta\n");
+
+                    for (Jugador jugador : jugadores) {
+                        writer.write(jugador.getNombre() + ",");
+                        writer.write(jugador.getApellido() + ",");
+                        writer.write(jugador.getAltura() + ",");
+                        writer.write(jugador.getPosicion() + ",");
+                        writer.write(jugador.getGoles() + ",");
+                        writer.write(jugador.getPartidos() + ",");
+                        writer.write(jugador.esCapitan() + ",");
+                        writer.write(jugador.getNumeroCamiseta() + "\n");
+                    }
+
+                    System.out.println("Exportación exitosa a " + nombreArchivo);
+                } catch (IOException e) {
+                    System.out.println("Error al exportar jugadores: " + e.getMessage());
+                }
+
                 return;
             }
         }
@@ -189,6 +257,3 @@ public class EquipoServiceImpl implements EquipoService {
     }
 
 }
-
-
-
