@@ -1,0 +1,5 @@
+Equipo:River,Apellido y nombre entrenador:Villa Leo,Apellido y nombre jugador:BritezAngel,Altura:1.9,Posición:Delantero,Cantidad de goles:30,Cantidad de partidos jugados:100,¿El jugador es capitan?:true,Número de camiseta:23
+Equipo:River,Apellido y nombre entrenador:Villa Leo,Apellido y nombre jugador:BritezJonas,Altura:1.78,Posición:Arquero,Cantidad de goles:40,Cantidad de partidos jugados:120,¿El jugador es capitan?:false,Número de camiseta:12
+Equipo:River,Apellido y nombre entrenador:Villa Leo,Apellido y nombre jugador:BrossMario,Altura:1.56,Posición:Mediocampista,Cantidad de goles:21,Cantidad de partidos jugados:150,¿El jugador es capitan?:false,Número de camiseta:16
+Equipo:River,Apellido y nombre entrenador:Villa Leo,Apellido y nombre jugador:BriCoti,Altura:1.8,Posición:Defensor,Cantidad de goles:25,Cantidad de partidos jugados:130,¿El jugador es capitan?:false,Número de camiseta:15
+Equipo:River,Apellido y nombre entrenador:Villa Leo,Apellido y nombre jugador:JediJoda,Altura:1.4,Posición:Defensor,Cantidad de goles:35,Cantidad de partidos jugados:113,¿El jugador es capitan?:false,Número de camiseta:15

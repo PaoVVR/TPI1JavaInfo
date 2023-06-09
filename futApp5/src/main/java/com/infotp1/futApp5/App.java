@@ -24,14 +24,9 @@ public class App {
         MenuOpciones menuOpciones = new MenuOpcionesImpl();
         menuOpciones.menu();
 
+//importarDesde
         String rutaArchivo = "src/main/java/com/infotp1/futApp5/resources/listJugEnt.txt";
-
         Jugador jugadores = inputFileService.importarJugadores(rutaArchivo);
         System.out.println("El archivo se creo correctamente");
-
-        String rutaArchivoSalida ="./src/main/java/com/infotp1/futApp5/resources/";
-        System.out.println("El archivo se creo correctamente");
-
-        outputFileService.exportarJugadoresAArchivo(rutaArchivoSalida);
     }
 }

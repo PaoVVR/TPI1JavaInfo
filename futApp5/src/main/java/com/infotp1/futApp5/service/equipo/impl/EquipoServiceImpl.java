@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class EquipoServiceImpl implements EquipoService {
 
 
-    private static List<Equipo> equipos = new ArrayList<>();
+    private List<Equipo> equipos = new ArrayList<>();
     private static Scanner scanner;
 
     public void crearEquipo(Scanner scanner) {
@@ -176,43 +176,37 @@ public class EquipoServiceImpl implements EquipoService {
     public void importarJugadoresDesdeArchivo(Scanner scanner) {
         System.out.print("Ingrese el nombre del archivo: ");
         String nombreArchivo = scanner.next();
-
         try {
-            File archivo = new File(nombreArchivo);
+            File archivo = new File("src\\main\\java\\com\\infotp1\\futApp5\\resources\\" + nombreArchivo);
             Scanner lector = new Scanner(archivo);
-
             List<Jugador> jugadoresImportados = new ArrayList<>();
-
             if (lector.hasNextLine()) {
                 lector.nextLine();
             }
-
             while (lector.hasNextLine()) {
                 String linea = lector.nextLine();
-
                 String[] campos = linea.split(",");
-
                 if (campos.length == 9) {
                     // Obtener los valores de los campos
                     String nombre = campos[0].trim();
                     String apellido = campos[1].trim();
-                    double altura = Double.parseDouble(campos[2].trim());
+                    String altura = campos[2].trim();
                     String posicion = campos[3].trim();
-                    int goles = Integer.parseInt(campos[4].trim());
-                    int partidos = Integer.parseInt(campos[5].trim());
-                    boolean esCapitan = Boolean.parseBoolean(campos[6].trim());
-                    int numeroCamiseta = Integer.parseInt(campos[7].trim());
+                    String goles = campos[4].trim();
+                    String partidos = campos[5].trim();
+                    String esCapitan = campos[6].trim();
+                    String numeroCamiseta = campos[7].trim();
                     String nombreEquipo = campos[8].trim();
-
 
                     Jugador jugador = new Jugador(nombre, apellido, altura, posicion, goles, partidos, esCapitan, numeroCamiseta);
                     jugadoresImportados.add(jugador);
+                    System.out.println("Importación exitosa"+ jugador );
                 }
             }
-
             lector.close();
         } catch (FileNotFoundException e) {
             System.out.println("Error al importar jugadores desde el archivo: Archivo no encontrado");
+            
         }
     }
 
@@ -229,19 +223,18 @@ public class EquipoServiceImpl implements EquipoService {
 
                 List<Jugador> jugadores = equipo.getJugadores();
 
-                try (FileWriter writer = new FileWriter("./src/main/java/com/infotp1/futApp5/resources/"+ nombreArchivo)) {
-
-                    writer.write("Equipo,Nombre,Apellido,Altura,Posicion,Goles,Partidos,EsCapitan,NumeroCamiseta\n");
+                try (FileWriter writer = new FileWriter("src\\main\\java\\com\\infotp1\\futApp5\\resources\\"+ nombreArchivo)) {
 
                     for (Jugador jugador : jugadores) {
-                        writer.write(jugador.getNombre() + ",");
-                        writer.write(jugador.getApellido() + ",");
-                        writer.write(jugador.getAltura() + ",");
-                        writer.write(jugador.getPosicion() + ",");
-                        writer.write(jugador.getGoles() + ",");
-                        writer.write(jugador.getPartidos() + ",");
-                        writer.write(jugador.esCapitan() + ",");
-                        writer.write(jugador.getNumeroCamiseta() + "\n");
+                        writer.write("Equipo:" + equipo.getNombre() + "; ");
+                        writer.write("Apellido y nombre del entrenador:" + equipo.getEntrenador().getApellido() + " " + equipo. getEntrenador().getNombre()+"; ");
+                        writer.write("Apellido y nombre del jugador:" +jugador.getApellido() +" "+ jugador.getNombre() + "; ");
+                        writer.write("Altura:"+ jugador.getAltura() + "; ");
+                        writer.write("Posición:" + jugador.getPosicion() + "; ");
+                        writer.write("Cantidad de goles:" + jugador.getGoles() + "; ");
+                        writer.write("Cantidad de partidos jugados:" + jugador.getPartidos() + "; ");
+                        writer.write("¿El jugador es capitan?:" + jugador.esCapitan() + "; ");
+                        writer.write("Número de camiseta:" + jugador.getNumeroCamiseta() + "\n");
                     }
 
                     System.out.println("Exportación exitosa a " + nombreArchivo);

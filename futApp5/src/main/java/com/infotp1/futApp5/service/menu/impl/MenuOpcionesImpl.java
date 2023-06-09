@@ -3,14 +3,12 @@ package com.infotp1.futApp5.service.menu.impl;
 import com.infotp1.futApp5.service.equipo.EquipoService;
 import com.infotp1.futApp5.service.equipo.impl.EquipoServiceImpl;
 import com.infotp1.futApp5.service.menu.MenuOpciones;
-import com.infotp1.futApp5.service.salida.OutputFileService;
-import com.infotp1.futApp5.service.salida.impl.OutputFileServiceImpl;
+
 import java.util.Scanner;
 
 public class MenuOpcionesImpl implements MenuOpciones {
 
     public static final EquipoService equipoService = new EquipoServiceImpl();
-    private static final OutputFileService outputFileService = new OutputFileServiceImpl();
 
     @Override
     public void menu() {
@@ -31,8 +29,7 @@ public class MenuOpcionesImpl implements MenuOpciones {
             int opcion = scanner.nextInt();
 
             switch (opcion) {
-                case 1:
-                    equipoService.crearEquipo(scanner);
+                case 1: equipoService.crearEquipo(scanner);
                     break;
                 case 2:
                     equipoService.buscarJugadorPorNombre(scanner);

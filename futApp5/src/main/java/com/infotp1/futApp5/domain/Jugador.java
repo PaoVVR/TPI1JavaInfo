@@ -28,6 +28,9 @@ public class Jugador {
     public Jugador(String nombre, String apellido, double altura, String posicion, int goles, int partidos, boolean esCapitan, int numeroCamiseta) {
     }
 
+    public Jugador(String nombre, String apellido, String altura, String posicion, String goles, String partidos, String esCapitan, String numeroCamiseta) {
+    }
+
 
     // Getters y setters
 

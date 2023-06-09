@@ -9,7 +9,7 @@ import java.util.List;
 
 public class OutputFileServiceImpl implements OutputFileService {
     public void exportarJugadoresAArchivo(String nombreArchivo, List<Jugador> jugadores) {
-        try (FileWriter fileWriter = new FileWriter("listJug.txt")) {
+        try (FileWriter fileWriter = new FileWriter("listJugSalida.txt")) {
             // Escribir los jugadores en el archivo
             for (Jugador jugador : jugadores) {
                 String linea = jugador.getNombre() + "," + jugador.getApellido() + "," + jugador.getAltura() + "," +
