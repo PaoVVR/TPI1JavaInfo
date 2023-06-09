@@ -1,14 +1,21 @@
 package com.infotp1.futApp5.service.menu.impl;
 
+import com.infotp1.futApp5.domain.Equipo;
 import com.infotp1.futApp5.service.equipo.EquipoService;
 import com.infotp1.futApp5.service.equipo.impl.EquipoServiceImpl;
 import com.infotp1.futApp5.service.menu.MenuOpciones;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MenuOpcionesImpl implements MenuOpciones {
 
     public static final EquipoService equipoService = new EquipoServiceImpl();
+
+    public List<Equipo> equipos = new ArrayList<>();
+
+
 
     @Override
     public void menu() {

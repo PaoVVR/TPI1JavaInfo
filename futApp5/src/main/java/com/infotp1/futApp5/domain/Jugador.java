@@ -25,12 +25,17 @@ public class Jugador {
         this.equipo = equipo;
     }
 
-    public Jugador(String nombre, String apellido, double altura, String posicion, int goles, int partidos, boolean esCapitan, int numeroCamiseta) {
+    public Jugador(String nombre, String apellido, double altura, String posicion, int goles, int partidos,
+                   boolean esCapitan, int numeroCamiseta) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.altura = altura;
+        this.posicion = posicion;
+        this.goles = goles;
+        this.partidos = partidos;
+        this.esCapitan = esCapitan;
+        this.numeroCamiseta = numeroCamiseta;
     }
-
-    public Jugador(String nombre, String apellido, String altura, String posicion, String goles, String partidos, String esCapitan, String numeroCamiseta) {
-    }
-
 
     // Getters y setters
 
@@ -122,5 +127,20 @@ public class Jugador {
 
     public String obtenerEquipo() {
         return equipo.getNombre();
+    }
+
+    @Override
+    public String toString() {
+        return "Jugador{" +
+                "nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", altura=" + altura +
+                ", posicion='" + posicion + '\'' +
+                ", goles=" + goles +
+                ", partidos=" + partidos +
+                ", esCapitan=" + esCapitan +
+                ", numeroCamiseta=" + numeroCamiseta +
+                ", equipo=" + equipo +
+                '}';
     }
 }

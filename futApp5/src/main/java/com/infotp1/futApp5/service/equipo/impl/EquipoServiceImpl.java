@@ -5,20 +5,30 @@ import com.infotp1.futApp5.domain.Entrenador;
 import com.infotp1.futApp5.domain.Equipo;
 import com.infotp1.futApp5.domain.Jugador;
 import com.infotp1.futApp5.service.equipo.EquipoService;
+import com.infotp1.futApp5.service.menu.impl.MenuOpcionesImpl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class EquipoServiceImpl implements EquipoService {
 
 
-    private List<Equipo> equipos = new ArrayList<>();
+
+    
     private static Scanner scanner;
+
+    MenuOpcionesImpl menuOpciones = new MenuOpcionesImpl();
+
+    @Override
+    public List<Equipo> listaDeEquipo(MenuOpcionesImpl menuOpciones){
+        return menuOpciones.equipos;
+    }
+
+    private final List<Equipo> equipos = listaDeEquipo(menuOpciones);
 
     public void crearEquipo(Scanner scanner) {
         EquipoServiceImpl.scanner = scanner;
@@ -174,41 +184,38 @@ public class EquipoServiceImpl implements EquipoService {
 
     @Override
     public void importarJugadoresDesdeArchivo(Scanner scanner) {
-        System.out.print("Ingrese el nombre del archivo: ");
-        String nombreArchivo = scanner.next();
+        // String nombreArchivo = scanner.next();
+        String nombreArchivo = "listJugEnt.txt";
         try {
             File archivo = new File("src\\main\\java\\com\\infotp1\\futApp5\\resources\\" + nombreArchivo);
-            Scanner lector = new Scanner(archivo);
-            List<Jugador> jugadoresImportados = new ArrayList<>();
-            if (lector.hasNextLine()) {
-                lector.nextLine();
+                    Scanner lector = new Scanner(archivo);
+            if (lector.hasNextLine()) {        lector.nextLine();
             }
             while (lector.hasNextLine()) {
                 String linea = lector.nextLine();
                 String[] campos = linea.split(",");
-                if (campos.length == 9) {
+                if (campos.length == 8) {
                     // Obtener los valores de los campos
                     String nombre = campos[0].trim();
                     String apellido = campos[1].trim();
-                    String altura = campos[2].trim();
+                    double altura = Double.parseDouble(campos[2].trim());
                     String posicion = campos[3].trim();
-                    String goles = campos[4].trim();
-                    String partidos = campos[5].trim();
-                    String esCapitan = campos[6].trim();
-                    String numeroCamiseta = campos[7].trim();
-                    String nombreEquipo = campos[8].trim();
+                    int goles = Integer.parseInt(campos[4].trim());
+                    int partidos = Integer.parseInt(campos[5].trim());
+                    boolean esCapitan = Boolean.parseBoolean(campos[6].trim());
+                    int numeroCamiseta = Integer.parseInt(campos[7].trim());
 
-                    Jugador jugador = new Jugador(nombre, apellido, altura, posicion, goles, partidos, esCapitan, numeroCamiseta);
-                    jugadoresImportados.add(jugador);
-                    System.out.println("Importación exitosa"+ jugador );
+                    Jugador jugador = new Jugador(nombre, apellido, altura, posicion, goles,
+                            partidos, esCapitan, numeroCamiseta);
+                    System.out.println("Importación exitosa" + jugador);
                 }
             }
             lector.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Error al importar jugadores desde el archivo: Archivo no encontrado");
-            
+            System.out.println("Error al importar jugadores desde el archivo: Archivo no encontrado" + e.getMessage());
         }
     }
+
 
     @Override
     public void exportarJugadoresAArchivo(Scanner scanner) {
