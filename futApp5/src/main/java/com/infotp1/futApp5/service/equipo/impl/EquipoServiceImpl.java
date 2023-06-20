@@ -4,6 +4,7 @@ package com.infotp1.futApp5.service.equipo.impl;
 import com.infotp1.futApp5.domain.Entrenador;
 import com.infotp1.futApp5.domain.Equipo;
 import com.infotp1.futApp5.domain.Jugador;
+import com.infotp1.futApp5.service.Jugador.JugadorServiceImpl;
 import com.infotp1.futApp5.service.equipo.EquipoService;
 import com.infotp1.futApp5.service.menu.impl.MenuOpcionesImpl;
 
@@ -16,9 +17,7 @@ import java.util.Scanner;
 
 public class EquipoServiceImpl implements EquipoService {
 
-
-
-    
+    private JugadorServiceImpl jugadorService = new JugadorServiceImpl();
     private static Scanner scanner;
 
     MenuOpcionesImpl menuOpciones = new MenuOpcionesImpl();
@@ -28,7 +27,7 @@ public class EquipoServiceImpl implements EquipoService {
         return menuOpciones.equipos;
     }
 
-    private final List<Equipo> equipos = listaDeEquipo(menuOpciones);
+    public final List<Equipo> equipos = listaDeEquipo(menuOpciones);
 
     public void crearEquipo(Scanner scanner) {
         EquipoServiceImpl.scanner = scanner;
@@ -49,30 +48,15 @@ public class EquipoServiceImpl implements EquipoService {
 
         boolean cargarJugadores = true;
         while (cargarJugadores) {
-            System.out.print("Ingrese el nombre del jugador: ");
-            String nombreJugador = scanner.next();
-            System.out.print("Ingrese el apellido del jugador: ");
-            String apellidoJugador = scanner.next();
-            System.out.print("Ingrese la altura del jugador: ");
-            double alturaJugador = scanner.nextDouble();
-            System.out.print("Ingrese la posición del jugador (Arquero/Defensor/Mediocampista/Delantero): ");
-            String posicionJugador = scanner.next();
-            System.out.print("Ingrese la cantidad de goles del jugador: ");
-            int golesJugador = scanner.nextInt();
-            System.out.print("Ingrese la cantidad de partidos del jugador: ");
-            int partidosJugador = scanner.nextInt();
-            System.out.print("¿El jugador es capitán? (true/false): ");
-            boolean esCapitan = scanner.nextBoolean();
-            System.out.print("Ingrese el número de camiseta del jugador: ");
-            int numeroCamiseta = scanner.nextInt();
 
-            Jugador jugador = new Jugador(nombreJugador, apellidoJugador, alturaJugador, posicionJugador,
-                    golesJugador, partidosJugador, esCapitan, numeroCamiseta, equipo);
-            equipo.getJugadores().add(jugador);
+            Jugador nuevoJugador = jugadorService.crearJugador();
+            nuevoJugador.setEquipo(equipo);
+            equipo.getJugadores().add(nuevoJugador);
 
             System.out.print("¿Desea cargar más jugadores para este equipo? (True/False): ");
             cargarJugadores = scanner.nextBoolean();
         }
+
         System.out.print("¿Desea cargar más equipos? (true/false): ");
         boolean cargarEquipos = scanner.nextBoolean();
         if (!cargarEquipos) {
@@ -95,25 +79,7 @@ public class EquipoServiceImpl implements EquipoService {
 
 
 
-    public void buscarJugadorPorNombre(Scanner scanner) {
-        System.out.print("Ingrese el nombre del jugador a buscar: ");
-        String nombreJugador = scanner.next();
 
-        for (Equipo equipo : equipos) {
-            for (Jugador jugador : equipo.getJugadores()) {
-                if (jugador.getNombre().equalsIgnoreCase(nombreJugador)) {
-                    System.out.println("Nombre: " + jugador.getNombre());
-                    System.out.println("Apellido: " + jugador.getApellido());
-                    System.out.println("Posición: " + jugador.getPosicion());
-                    System.out.println("Es capitán: " + (jugador.esCapitan() ? "Sí" : "No"));
-                    System.out.println("Equipo: " + jugador.getEquipo().getNombre());
-                    return;
-                }
-            }
-        }
-
-        System.out.println("No se encontró ningún jugador con ese nombre.");
-    }
 
     @Override
     public void buscarEquipoPorNombre(Scanner scanner) {

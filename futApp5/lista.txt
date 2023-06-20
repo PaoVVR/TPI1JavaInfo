@@ -1,1 +1,0 @@
-Equipo:River; Apellido y nombre del entrenador:Kelblod Ian; Apellido y nombre del jugador:Villa Paola; Altura:1.5; Posición:Arquero; Cantidad de goles:2; Cantidad de partidos jugados:20; ¿El jugador es capitan?:true; Número de camiseta:23

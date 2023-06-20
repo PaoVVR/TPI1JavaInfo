@@ -1,1 +1,0 @@
-Equipo:Boca; Apellido y nombre del entrenador:kelbold ian; Apellido y nombre del jugador:Villa Pao; Altura:1.5; Posición:Arquero; Cantidad de goles:3; Cantidad de partidos jugados:20; ¿El jugador es capitan?:true; Número de camiseta:23

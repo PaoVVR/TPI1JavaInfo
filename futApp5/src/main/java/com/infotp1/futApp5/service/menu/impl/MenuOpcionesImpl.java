@@ -1,6 +1,7 @@
 package com.infotp1.futApp5.service.menu.impl;
 
 import com.infotp1.futApp5.domain.Equipo;
+import com.infotp1.futApp5.service.Jugador.JugadorServiceImpl;
 import com.infotp1.futApp5.service.equipo.EquipoService;
 import com.infotp1.futApp5.service.equipo.impl.EquipoServiceImpl;
 import com.infotp1.futApp5.service.menu.MenuOpciones;
@@ -12,7 +13,7 @@ import java.util.Scanner;
 public class MenuOpcionesImpl implements MenuOpciones {
 
     public static final EquipoService equipoService = new EquipoServiceImpl();
-
+    public static final JugadorServiceImpl jugadorService= new JugadorServiceImpl();
     public List<Equipo> equipos = new ArrayList<>();
 
 
@@ -39,7 +40,7 @@ public class MenuOpcionesImpl implements MenuOpciones {
                 case 1: equipoService.crearEquipo(scanner);
                     break;
                 case 2:
-                    equipoService.buscarJugadorPorNombre(scanner);
+                    jugadorService.buscarJugadorPorNombre(scanner);
                     break;
                 case 3:
                     equipoService.buscarEquipoPorNombre(scanner);
